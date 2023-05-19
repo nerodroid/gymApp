@@ -9,10 +9,9 @@
     "start": "react-native start",
     "test": "jest",
     "prepare": "husky install",
-		"lint:fix": "eslint --ext=js,ts,tsx src --fix",
-		"lint:types": "tsc",
-		"spellcheck": "cspell \"src/**/{*.js,*.ts,*.tsx}\""
-    
+    "lint:fix": "eslint --ext=js,ts,tsx src --fix",
+    "lint:types": "tsc",
+    "spellcheck": "cspell \"src/**/{*.js,*.ts,*.tsx}\""
   },
   "husky": {
     "hooks": {
@@ -20,6 +19,8 @@
     }
   },
   "dependencies": {
+    "@react-navigation/native": "^6.1.6",
+    "@react-navigation/native-stack": "^6.9.12",
     "cspell": "^6.31.1",
     "react": "18.2.0",
     "react-native": "0.71.8"
