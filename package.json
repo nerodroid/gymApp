@@ -5,11 +5,13 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "lint": "eslint .",
+    "lint": "eslint --ext=js,ts,tsx src",
     "start": "react-native start",
     "test": "jest",
-    "spellcheck": "cspell \"src/**/{*.js,*.ts,*.tsx}\"",
-    "prepare": "husky install"
+    "prepare": "husky install",
+		"lint:fix": "eslint --ext=js,ts,tsx src --fix",
+		"lint:types": "tsc",
+		"spellcheck": "cspell \"src/**/{*.js,*.ts,*.tsx}\""
     
   },
   "husky": {
