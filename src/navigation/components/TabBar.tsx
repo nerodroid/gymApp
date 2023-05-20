@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 
-import {View, Pressable, Dimensions, StyleSheet, Animated} from 'react-native';
+import {View, Pressable, Dimensions, Animated} from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const {width} = Dimensions.get('window');
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -109,23 +110,24 @@ const TabBar = ({state, descriptors, navigation}: any) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   mainContainer: {
     flexDirection: 'row',
     position: 'absolute',
-    bottom: 25,
+    bottom: '25rem',
     backgroundColor: '#75757575',
-    borderRadius: 35,
+    borderRadius: '35rem',
     //marginHorizontal: width * 0.1,
-    width: '90%',
+    width: '86%',
+    height: '60rem',
     alignSelf: 'center',
   },
   mainItemContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 10,
-    borderRadius: 1,
+
+    borderRadius: '1rem',
     borderColor: '#333B42',
   },
 });

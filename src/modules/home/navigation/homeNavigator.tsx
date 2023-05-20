@@ -1,17 +1,23 @@
-import Profile from '@gym-app/modules/profile/screens/Profile';
+import Profile from '@gym-app/modules/profile/screens/ProfileScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import Home from '@gym-app/modules/home/screens/Home';
+import HomeScreen from '@gym-app/modules/home/screens/home/homeScreen';
+import ExercisesScreen from '@gym-app/modules/home/screens/exercises/exerciseScreen';
 
 const Stack = createNativeStackNavigator();
 
 const HomeTabNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator initialRouteName="HomeScreen">
       <Stack.Screen
         name="HomeScreen"
         options={{headerShown: false}}
-        component={Home}
+        component={HomeScreen}
+      />
+      <Stack.Screen
+        name="ExerciseScreen"
+        component={ExercisesScreen}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="ProfileScreen"
