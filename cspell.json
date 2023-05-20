@@ -3,6 +3,7 @@
     "ignoreWords": [
       "cspell",
       "React",
-      "Native"
+      "Native",
+      "Pressable"
     ]
   }
