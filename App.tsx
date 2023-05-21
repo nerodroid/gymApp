@@ -1,8 +1,8 @@
 import React from 'react';
 
 import {RootNavigator} from '@gym-app/navigation/rootNavigator';
-import {exerciseContext} from '@gym-app/storage/realm/models/Exercise';
-const {RealmProvider} = exerciseContext;
+import {gymAppContext} from '@gym-app/storage/realm/models/realmConfig';
+const {RealmProvider} = gymAppContext;
 
 function App(): JSX.Element {
   return (
@@ -10,6 +10,8 @@ function App(): JSX.Element {
       <RootNavigator />
     </RealmProvider>
   );
+
+  return <RootNavigator />;
 }
 
 export default App;

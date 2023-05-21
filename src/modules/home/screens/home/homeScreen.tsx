@@ -13,6 +13,7 @@ import {ParamListBase, RouteProp} from '@react-navigation/native';
 type RootStackParamList = {
   HomeScreen: undefined;
   ExerciseScreen: undefined;
+  ScheduleScreen: undefined;
 };
 
 type Props = {
@@ -33,13 +34,16 @@ const HomeScreen = ({navigation, route}: Props) => {
         backgroundColor="#FAFAFA55"
       />
       <ImageButton
-        onClick={() => console.log()}
-        title={'See Progress'}
+        onClick={() => {
+          console.log();
+          navigation.navigate('ScheduleScreen');
+        }}
+        title={'Schedules'}
         backgroundColor="#FAFAFA55"
       />
       <ImageButton
         onClick={() => navigation.navigate('ExerciseScreen')}
-        title={'Learn Exercises'}
+        title={'Exercises'}
         backgroundColor="#FAFAFA55"
       />
     </SafeAreaView>

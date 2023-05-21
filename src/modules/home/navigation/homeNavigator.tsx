@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import HomeScreen from '@gym-app/modules/home/screens/home/homeScreen';
 import ExercisesScreen from '@gym-app/modules/home/screens/exercises/exerciseScreen';
+import ScheduleScreen from '../screens/schedules/ScheduleScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,8 +21,8 @@ const HomeTabNavigator = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="ProfileScreen"
-        component={Profile}
+        name="ScheduleScreen"
+        component={ScheduleScreen}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

@@ -9,6 +9,10 @@ const styles = EStyleSheet.create({
     fontSize: '20rem',
     color: 'black',
   },
+  subTitle: {
+    fontSize: '16rem',
+    color: 'black',
+  },
   textInput: {
     height: '40rem',
     // width: '100%',
