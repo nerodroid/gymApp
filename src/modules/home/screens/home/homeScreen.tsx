@@ -10,7 +10,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import {ParamListBase, RouteProp} from '@react-navigation/native';
 
-type RootStackParamList = {
+type HomeStackParamList = {
   HomeScreen: undefined;
   ExerciseScreen: undefined;
   ScheduleScreen: undefined;
@@ -18,7 +18,7 @@ type RootStackParamList = {
 
 type Props = {
   route: RouteProp<ParamListBase, 'HomeScreen'>;
-  navigation: NativeStackNavigationProp<RootStackParamList>;
+  navigation: NativeStackNavigationProp<HomeStackParamList>;
 };
 
 const HomeScreen = ({navigation, route}: Props) => {

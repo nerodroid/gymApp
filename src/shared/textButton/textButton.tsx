@@ -20,8 +20,8 @@ const styles = EStyleSheet.create({
   button: {
     backgroundColor: '#2196F3',
     borderRadius: '8rem',
-    paddingVertical: '12rem',
-
+    paddingVertical: '8rem',
+    width: '220rem',
     alignItems: 'center',
   },
   buttonText: {

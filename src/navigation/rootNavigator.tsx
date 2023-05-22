@@ -7,6 +7,7 @@ import TabBar from './components/TabBar';
 import {Dimensions, StatusBar} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import WorkoutTabNavigator from '@gym-app/modules/workout/navigation/workoutNavigator';
 
 const entireScreenWidth = Dimensions.get('window').width;
 
@@ -23,7 +24,7 @@ const tabs = [
   {
     name: 'Workout',
     label: 'Workout',
-    component: Profile,
+    component: WorkoutTabNavigator,
   },
   {
     name: 'Profile',
