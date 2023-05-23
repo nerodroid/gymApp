@@ -22,7 +22,7 @@ const exerciseActions = {
     // console.log(getRealmInstance().objectForPrimaryKey('Exercise', id));
     return getRealmInstance().objectForPrimaryKey('Exercise', id);
   },
-  deleteExercise: (exercise: Exercise): any => {
+  deleteExercise: (exercise: ExerciseItem): any => {
     getRealmInstance().write(() => {
       getRealmInstance().delete(exercise);
     });

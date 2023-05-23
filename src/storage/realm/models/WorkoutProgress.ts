@@ -5,7 +5,7 @@ export class WorkoutProgress extends Realm.Object<WorkoutProgress> {
   exercise!: Exercise;
   reps!: number;
   sets!: number;
-  weightArray!: string[];
+  weightAmounts!: string[];
   index!: number;
 
   static schema = {
@@ -15,7 +15,7 @@ export class WorkoutProgress extends Realm.Object<WorkoutProgress> {
     properties: {
       _id: 'objectId',
       exercise: 'Exercise',
-      weightArray: 'string[]',
+      weightAmounts: 'string[]',
       reps: 'int',
       sets: 'int',
       index: 'int',

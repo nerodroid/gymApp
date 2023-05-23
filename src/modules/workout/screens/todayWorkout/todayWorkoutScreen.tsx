@@ -6,7 +6,14 @@ import {
 } from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, FlatList, TextInput} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TextInput,
+  Button,
+} from 'react-native';
 import {WorkoutStackParamList} from '../workout/workoutScreen';
 import {ExerciseItem} from '@gym-app/storage/realm/actions/exerciseActions';
 import TextInputList, {
@@ -16,6 +23,7 @@ import TextButton from '@gym-app/shared/textButton/textButton';
 import {Workout} from '@gym-app/storage/realm/models/Workout';
 import {Schedule} from '@gym-app/storage/realm/models/Schedule';
 import ScheduleProgressActions from '@gym-app/storage/realm/actions/scheduleProgressActions';
+import DatePicker from 'react-native-date-picker';
 
 interface WorkoutItem {
   _id: Realm.BSON.ObjectId;
@@ -32,7 +40,7 @@ interface ScheduleItem {
   workouts: WorkoutItem[];
 }
 
-export interface WorkoutProcessItem {
+export interface WorkoutProgressItem {
   _id: Realm.BSON.ObjectId;
   exercise: ExerciseItem;
   reps?: number;
@@ -45,10 +53,11 @@ export interface ScheduleProgressItem {
   _id: Realm.BSON.ObjectId;
   date: Date;
   schedule: ScheduleItem;
-  workoutProgresses: WorkoutProcessItem[];
+  workoutProgresses: WorkoutProgressItem[];
 }
-interface ScheduleItemProps {
+interface ParamsProps {
   scheduleItem: ScheduleItem;
+  past: boolean;
 }
 
 type Props = {
@@ -58,17 +67,22 @@ type Props = {
 
 const TodayWorkoutScreen = (props: Props) => {
   const {route} = props;
-  const {params} = route;
-  const scheduleItem = (params as ScheduleItemProps).scheduleItem;
+  const params: ParamsProps = route.params as ParamsProps;
+
+  const scheduleItem = params.scheduleItem;
+  const past = params.past;
   const workoutItems = scheduleItem.workouts;
   const navigation = useNavigation<NavigationProp<any>>();
 
-  const [workoutInputs, setWorkoutInputs] = useState<WorkoutProcessItem[]>([]);
+  const [workoutInputs, setWorkoutInputs] = useState<WorkoutProgressItem[]>([]);
+
+  const [pickedDate, setPickedDate] = useState(new Date());
+
   //   const [workoutProcessList, setWorkoutProcessList] = useState<
   //     WorkoutProcessItem[]
   //   >([]);
 
-  const onSubmitWorkoutWeights = (inputValues: WorkoutProcessItem) => {
+  const onSubmitWorkoutWeights = (inputValues: WorkoutProgressItem) => {
     console.log('inputValues', inputValues);
 
     const tempWorkoutArray = workoutInputs;
@@ -90,7 +104,7 @@ const TodayWorkoutScreen = (props: Props) => {
     console.log(scheduleItem);
     const scheduleProgressItem: ScheduleProgressItem = {
       _id: new Realm.BSON.ObjectId(),
-      date: new Date(),
+      date: pickedDate,
       schedule: scheduleItem,
       workoutProgresses: workoutInputs,
     };
@@ -98,26 +112,36 @@ const TodayWorkoutScreen = (props: Props) => {
 
     ScheduleProgressActions.addScheduleProgress(scheduleProgressItem);
   };
-
+  const renderDatePickerButton = () => {
+    return (
+      <>
+        <DatePicker
+          date={pickedDate}
+          mode={'date'}
+          onDateChange={setPickedDate}
+        />
+      </>
+    );
+  };
   const renderWorkoutItem = ({item}: {item: Workout}) => {
     return (
       <View style={styles.workoutContainer}>
+        {past && renderDatePickerButton()}
         <Text style={styles.workoutText}>{item.exercise.name}</Text>
         <Text style={styles.workoutText}>Reps: {item.reps}</Text>
         <Text style={styles.workoutText}>Sets: {item.sets}</Text>
+        <Text style={styles.workoutText}>Index: {item.index}</Text>
         <View style={styles.setsContainer}>
           <TextInputList
             workoutItem={item}
             workoutIndex={item.index}
             initialInputAmount={item.sets}
             canChangeInputAmount={false}
-            onSubmit={(inputValues: WorkoutProcessItem) =>
+            onSubmit={(inputValues: WorkoutProgressItem) =>
               onSubmitWorkoutWeights(inputValues)
             }
           />
         </View>
-
-        <Text style={styles.workoutText}>Index: {item.index}</Text>
       </View>
     );
   };
@@ -140,7 +164,7 @@ const TodayWorkoutScreen = (props: Props) => {
       <Text style={styles.sectionTitle}>Workouts:</Text>
       <FlatList
         data={workoutItems as Workout[]}
-        keyExtractor={item => item._id.toHexString()}
+        keyExtractor={item => item._id.toString()}
         renderItem={renderWorkoutItem}
         contentContainerStyle={styles.workoutsList}
       />

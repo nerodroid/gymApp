@@ -61,6 +61,15 @@ const WorkoutScreen = (props: Props) => {
     }
   };
 
+  const handleNavigateToMissingWorkoutScreen = () => {
+    if (selectedScheduleItem) {
+      navigate('TodayWorkoutScreen', {
+        scheduleItem: selectedScheduleItem,
+        past: true,
+      });
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Workout Screen</Text>
@@ -84,7 +93,7 @@ const WorkoutScreen = (props: Props) => {
       <View style={styles.separator}></View>
       <TextButton
         onPress={() => {
-          console.log("Do today's workout");
+          handleNavigateToMissingWorkoutScreen();
         }}
         text={'Fill Missing Workout'}
       />

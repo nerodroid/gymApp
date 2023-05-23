@@ -28,7 +28,7 @@ const ExercisesScreen = () => {
   // };
   //const exercises = useQuery(Exercise);
 
-  const deleteItem = (item: Exercise) => {
+  const deleteItem = (item: ExerciseItem) => {
     exerciseActions.deleteExercise(item);
     setExercises(exerciseActions.getAllExercises());
   };
@@ -83,8 +83,8 @@ const ExercisesScreen = () => {
           <ExerciseListItem
             item={item}
             onDeleteClick={() => {
-              console.log('Delete Simulated');
-              // deleteItem(item);
+              //console.log('Delete Simulated');
+              deleteItem(item);
             }}
             onUpdateClick={(item: ExerciseItem) => {
               handleUpdateItem(item);
