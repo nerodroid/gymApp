@@ -1,4 +1,3 @@
-import {Realm} from '@realm/react';
 export class Exercise extends Realm.Object<Exercise> {
   _id!: Realm.BSON.ObjectId;
   name!: string;
@@ -9,6 +8,7 @@ export class Exercise extends Realm.Object<Exercise> {
   static schema = {
     name: 'Exercise',
     primaryKey: '_id',
+
     properties: {
       _id: 'objectId',
       name: 'string',

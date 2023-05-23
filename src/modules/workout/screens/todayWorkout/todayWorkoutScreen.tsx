@@ -15,9 +15,10 @@ import TextInputList, {
 import TextButton from '@gym-app/shared/textButton/textButton';
 import {Workout} from '@gym-app/storage/realm/models/Workout';
 import {Schedule} from '@gym-app/storage/realm/models/Schedule';
+import ScheduleProgressActions from '@gym-app/storage/realm/actions/scheduleProgressActions';
 
 interface WorkoutItem {
-  _id: string;
+  _id: Realm.BSON.ObjectId;
   exercise: ExerciseItem;
   reps: number;
   sets: number;
@@ -25,20 +26,29 @@ interface WorkoutItem {
 }
 
 interface ScheduleItem {
-  _id: string;
+  _id: Realm.BSON.ObjectId;
   name: string;
   description: string;
   workouts: WorkoutItem[];
 }
 
 export interface WorkoutProcessItem {
+  _id: Realm.BSON.ObjectId;
   exercise: ExerciseItem;
   reps?: number;
   sets?: number;
   weightAmounts: string[];
+  index: number;
+}
+
+export interface ScheduleProgressItem {
+  _id: Realm.BSON.ObjectId;
+  date: Date;
+  schedule: ScheduleItem;
+  workoutProgresses: WorkoutProcessItem[];
 }
 interface ScheduleItemProps {
-  scheduleItem: Schedule;
+  scheduleItem: ScheduleItem;
 }
 
 type Props = {
@@ -50,20 +60,43 @@ const TodayWorkoutScreen = (props: Props) => {
   const {route} = props;
   const {params} = route;
   const scheduleItem = (params as ScheduleItemProps).scheduleItem;
-
+  const workoutItems = scheduleItem.workouts;
   const navigation = useNavigation<NavigationProp<any>>();
 
   const [workoutInputs, setWorkoutInputs] = useState<WorkoutProcessItem[]>([]);
-  const [workoutProcessList, setWorkoutProcessList] = useState<
-    WorkoutProcessItem[]
-  >([]);
+  //   const [workoutProcessList, setWorkoutProcessList] = useState<
+  //     WorkoutProcessItem[]
+  //   >([]);
 
   const onSubmitWorkoutWeights = (inputValues: WorkoutProcessItem) => {
-    setWorkoutInputs([...workoutInputs, inputValues]);
-    //console.log('inputValues', inputValues);
+    console.log('inputValues', inputValues);
+
+    const tempWorkoutArray = workoutInputs;
+    const existingIndex = tempWorkoutArray.findIndex(
+      obj => obj.index === inputValues.index,
+    );
+
+    if (existingIndex !== -1) {
+      // Replace the existing object with the new object
+      tempWorkoutArray[existingIndex] = inputValues;
+    } else {
+      // Add the new object to the array
+      tempWorkoutArray.push(inputValues);
+    }
+
+    setWorkoutInputs(tempWorkoutArray);
   };
   const handleOncompleteWorkoutSession = () => {
-    console.log(workoutInputs);
+    console.log(scheduleItem);
+    const scheduleProgressItem: ScheduleProgressItem = {
+      _id: new Realm.BSON.ObjectId(),
+      date: new Date(),
+      schedule: scheduleItem,
+      workoutProgresses: workoutInputs,
+    };
+    console.log('scheduleProgressItem to save', scheduleProgressItem);
+
+    ScheduleProgressActions.addScheduleProgress(scheduleProgressItem);
   };
 
   const renderWorkoutItem = ({item}: {item: Workout}) => {
@@ -75,6 +108,7 @@ const TodayWorkoutScreen = (props: Props) => {
         <View style={styles.setsContainer}>
           <TextInputList
             workoutItem={item}
+            workoutIndex={item.index}
             initialInputAmount={item.sets}
             canChangeInputAmount={false}
             onSubmit={(inputValues: WorkoutProcessItem) =>
@@ -105,7 +139,7 @@ const TodayWorkoutScreen = (props: Props) => {
       <Text style={styles.description}>{scheduleItem.description}</Text>
       <Text style={styles.sectionTitle}>Workouts:</Text>
       <FlatList
-        data={scheduleItem.workouts}
+        data={workoutItems as Workout[]}
         keyExtractor={item => item._id.toHexString()}
         renderItem={renderWorkoutItem}
         contentContainerStyle={styles.workoutsList}
@@ -159,7 +193,7 @@ const styles = StyleSheet.create({
     color: '#555555',
   },
   setsContainer: {
-    height: 300,
+    height: 200,
   },
   inputContainer: {
     backgroundColor: '#FFFFFF',

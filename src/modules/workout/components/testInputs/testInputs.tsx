@@ -23,6 +23,7 @@ interface TextInputListProps {
   initialInputAmount: number;
   canChangeInputAmount?: boolean;
   workoutItem: WorkoutItem;
+  workoutIndex: number;
   onSubmit: (workoutProcessItem: WorkoutProcessItem) => void;
 }
 
@@ -30,6 +31,7 @@ const TextInputList: React.FC<TextInputListProps> = ({
   initialInputAmount,
   canChangeInputAmount,
   workoutItem,
+  workoutIndex,
   onSubmit,
 }) => {
   const [formInputs, setFormInputs] = useState<{set: number; value: string}[]>(
@@ -75,27 +77,38 @@ const TextInputList: React.FC<TextInputListProps> = ({
   };
 
   const validateValue = async (input: string) => {
+    setError('');
+    let valueError = false;
     try {
       await validateInputNumber(input);
+      valueError = false;
       // Validation succeeded, form values are valid
       //console.log('Form values are valid');
     } catch (error) {
+      valueError = true;
       // Validation failed, error contains validation errors
       //console.log('Form validation failed:', error);
       setError('Form validation failed: ' + error);
       ToastAndroid.show('Form validation failed:' + error, ToastAndroid.SHORT);
+
+      return;
     }
   };
   const handleSubmit = async () => {
     const inputValues = formInputs.map(input => {
       validateValue(input.value);
+
       return input.value;
     });
 
     if (error === undefined || error === '') {
       const workoutObject: WorkoutProcessItem = {
+        _id: new Realm.BSON.ObjectId(),
         exercise: workoutItem.exercise,
+        reps: workoutItem.reps,
+        sets: workoutItem.sets,
         weightAmounts: inputValues,
+        index: workoutIndex,
       };
 
       onSubmit(workoutObject);

@@ -88,6 +88,13 @@ const WorkoutScreen = (props: Props) => {
         }}
         text={'Fill Missing Workout'}
       />
+      <View style={styles.separator}></View>
+      <TextButton
+        onPress={() => {
+          navigate('AnalysisScreen');
+        }}
+        text={'Go to Analysis'}
+      />
     </View>
   );
 };

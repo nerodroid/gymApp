@@ -24,7 +24,7 @@ const scheduleActions = {
       console.log('err', err);
     }
   },
-  getExerciseById: (id: string): any => {
+  getScheduleById: (id: Realm.BSON.ObjectId): any => {
     try {
       return getRealmInstance().objectForPrimaryKey('Schedule', id);
     } catch (err) {

@@ -1,7 +1,7 @@
 import {View, Text, Button} from 'react-native';
 import {ScrollView, TextInput} from 'react-native-gesture-handler';
 import styles from './addSchedule.styles';
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import scheduleActions, {
   ScheduleItem,
   WorkoutItem,
@@ -28,6 +28,7 @@ const AddSchedule = () => {
   const [dropDownOptions, setDropDownOptions] = useState<string[]>();
   const [selectedOption, setSelectedOption] = useState('');
 
+  const [workoutIndex, setWorkoutIndex] = useState(0);
   useEffect(() => {
     const tempExerciseArray: string[] = [];
 
@@ -46,6 +47,11 @@ const AddSchedule = () => {
     setSelectedWorkout(tempExercise);
   };
 
+  const getWorkoutIndex = () => {
+    const currentIndex = workoutIndex;
+    setWorkoutIndex(workoutIndex + 1);
+    return currentIndex;
+  };
   const handleAddWorkout = () => {
     if (!selectedWorkout) {
       return;
@@ -53,7 +59,7 @@ const AddSchedule = () => {
     const tempWorkout: WorkoutItem = {
       _id: new Realm.BSON.ObjectId(),
       exercise: selectedWorkout,
-      index: 0,
+      index: getWorkoutIndex(),
       reps: parseInt(workoutReps),
       sets: parseInt(workoutSets),
     };

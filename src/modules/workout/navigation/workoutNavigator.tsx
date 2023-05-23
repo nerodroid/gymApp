@@ -2,6 +2,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import WorkoutScreen from '../screens/workout/workoutScreen';
 import TodayWorkoutScreen from '../screens/todayWorkout/todayWorkoutScreen';
+import AnalysisScreen from '../screens/analysis/analysisScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,11 @@ const WorkoutTabNavigator = () => {
         name="TodayWorkoutScreen"
         options={{headerShown: false}}
         component={TodayWorkoutScreen}
+      />
+      <Stack.Screen
+        name="AnalysisScreen"
+        options={{headerShown: false}}
+        component={AnalysisScreen}
       />
     </Stack.Navigator>
   );
