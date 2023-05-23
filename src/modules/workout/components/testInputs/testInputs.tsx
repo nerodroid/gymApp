@@ -12,7 +12,7 @@ import {
   Button,
   ToastAndroid,
 } from 'react-native';
-import {WorkoutProcessItem} from '../../screens/todayWorkout/todayWorkoutScreen';
+import {WorkoutProgressItem} from '../../screens/todayWorkout/todayWorkoutScreen';
 
 export interface SetWeightsFormInput {
   set: number;
@@ -24,7 +24,7 @@ interface TextInputListProps {
   canChangeInputAmount?: boolean;
   workoutItem: WorkoutItem;
   workoutIndex: number;
-  onSubmit: (workoutProcessItem: WorkoutProcessItem) => void;
+  onSubmit: (workoutProcessItem: WorkoutProgressItem) => void;
 }
 
 const TextInputList: React.FC<TextInputListProps> = ({
@@ -102,7 +102,7 @@ const TextInputList: React.FC<TextInputListProps> = ({
     });
 
     if (error === undefined || error === '') {
-      const workoutObject: WorkoutProcessItem = {
+      const workoutObject: WorkoutProgressItem = {
         _id: new Realm.BSON.ObjectId(),
         exercise: workoutItem.exercise,
         reps: workoutItem.reps,

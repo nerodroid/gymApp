@@ -1,6 +1,7 @@
 import {ImageBackground, Text, View} from 'react-native';
 
 import styles from './profileSection.styles';
+import LinearGradient from 'react-native-linear-gradient';
 
 const imageURL =
   // eslint-disable-next-line max-len
@@ -8,7 +9,23 @@ const imageURL =
 
 const ProfileSection: React.FC = () => {
   return (
-    <View style={styles.mainContainer}>
+    <LinearGradient
+      colors={['rgba(0,0,0,0.2)', 'rgba(0,0,0,0.5)']}
+      start={{x: 0, y: 0}} // Top-left corner
+      end={{x: 0, y: 1}} // Bottom-left corner
+      style={[
+        styles.mainContainer,
+        {
+          // flex: 1,
+          width: '100%',
+          //position: 'absolute',
+          // flex: 1,
+          //justifyContent: 'center',
+          // alignItems: 'center',
+          overflow: 'hidden',
+          //borderRadius: 40,
+        },
+      ]}>
       <View style={styles.profileContainer}>
         <View style={styles.profileIcon}>
           <ImageBackground
@@ -21,7 +38,7 @@ const ProfileSection: React.FC = () => {
           <Text style={styles.subtitleText}>Age: 28, Weight: 87 KG</Text>
         </View>
       </View>
-    </View>
+    </LinearGradient>
   );
 };
 

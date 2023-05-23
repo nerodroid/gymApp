@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 
 import {View, Pressable, Dimensions, Animated} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import LinearGradient from 'react-native-linear-gradient';
 
 const {width} = Dimensions.get('window');
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -30,7 +31,11 @@ const TabBar = ({state, descriptors, navigation}: any) => {
     transform: [{scale: animationOut}],
   };
   return (
-    <View style={styles.mainContainer}>
+    <LinearGradient
+      colors={['rgba(0,0,0,0.4)', 'rgba(0,0,0,0.7)']}
+      start={{x: 0, y: 0}} // Top-left corner
+      end={{x: 0, y: 1}} // Bottom-left corner
+      style={[styles.mainContainer]}>
       {state.routes.map((route: any, index: number) => {
         if (route.name == 'PlaceholderScreen') {
           return (
@@ -106,7 +111,7 @@ const TabBar = ({state, descriptors, navigation}: any) => {
           </View>
         );
       })}
-    </View>
+    </LinearGradient>
   );
 };
 

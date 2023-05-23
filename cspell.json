@@ -5,6 +5,8 @@
       "React",
       "Native",
       "Pressable",
-      "BSON"
+      "BSON",
+      "Formik",
+      "formik"
     ]
   }

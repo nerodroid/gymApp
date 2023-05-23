@@ -12,6 +12,7 @@ import scheduleActions, {
 import {ExerciseItem} from '@gym-app/storage/realm/actions/exerciseActions';
 import ScheduleListItem from '../../components/scheduleListItem/scheduleListItem';
 import AddSchedule from '../../components/addSchedule/addSchedule';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const ScheduleScreen = () => {
   const [schedules, setSchedules] = useState(scheduleActions.getAllSchedules());
@@ -83,7 +84,7 @@ const ScheduleScreen = () => {
   }, []);
 
   return (
-    <View style={styles.mainContainer}>
+    <SafeAreaView style={styles.mainContainer}>
       <AddSchedule />
       <FlatList
         data={schedules}
@@ -96,7 +97,7 @@ const ScheduleScreen = () => {
           />
         )}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

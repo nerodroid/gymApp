@@ -3,11 +3,16 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 const styles = EStyleSheet.create({
   mainContainer: {
     height: '70rem',
-    width: '90%',
-    backgroundColor: '#9E9E9E44',
+    // width: '100%',
+    backgroundColor: '#212121',
     alignSelf: 'center',
     borderRadius: '35rem',
     //alignContent: 'center',
+    elevation: 4,
+    shadowColor: '#FFFFFF',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
   },
   profileContainer: {
     flex: 1,

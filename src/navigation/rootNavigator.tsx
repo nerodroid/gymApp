@@ -36,8 +36,8 @@ const tabs = [
 const RootNavigator = () => {
   return (
     <GestureHandlerRootView style={{flex: 1}}>
+      <StatusBar backgroundColor={'#000'} barStyle={'light-content'} />
       <NavigationContainer>
-        <StatusBar backgroundColor={'#000'} barStyle={'light-content'} />
         <Tab.Navigator tabBar={props => <TabBar {...props} />}>
           {tabs.map((tab, index) => {
             return (

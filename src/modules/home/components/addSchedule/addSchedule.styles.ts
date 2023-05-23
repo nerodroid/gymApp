@@ -7,31 +7,24 @@ const styles = EStyleSheet.create({
   },
   title: {
     fontSize: '20rem',
-    color: 'black',
+    color: 'white',
+    textAlign: 'center',
   },
   subTitle: {
     fontSize: '16rem',
     color: 'black',
   },
-  textInput: {
-    height: '30rem',
-    // width: '100%',
-    backgroundColor: 'gray',
-    borderRadius: '5rem',
-    //marginHorizontal: '10rem',
-    // paddingHorizontal: '10rem',
-    // marginBottom: '5rem',
-  },
+
   inputContainer: {
     height: '250rem',
   },
   dropdownContainer: {
-    width: 200,
-    height: 40,
+    width: '200rem',
+    height: '40rem',
   },
   dropdown: {
     backgroundColor: '#fafafa',
-    borderWidth: 1,
+    borderWidth: '1rem',
     borderColor: '#ccc',
   },
   dropdownMenu: {
@@ -44,6 +37,47 @@ const styles = EStyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  textInputContainer: {
+    // flex: 1,
+    backgroundColor: '#ffffff22',
+    height: '35rem',
+    //paddingHorizontal: 16,
+    //paddingBottom: '40rem',
+    borderRadius: '4rem',
+  },
+
+  textTitle: {
+    paddingLeft: '5rem',
+    paddingTop: '10rem',
+    paddingBottom: '5rem',
+    color: 'white',
+  },
+  textInput: {
+    paddingHorizontal: '5rem',
+    color: 'white',
+    fontSize: '14rem',
+  },
+  errorText: {
+    color: 'red',
+    paddingTop: '6rem',
+    paddingLeft: '5rem',
+  },
+  dropdownButtonContainer: {
+    // flex: 1,
+    backgroundColor: '#ffffff',
+    height: '40rem',
+
+    borderRadius: '4rem',
+  },
+
+  textInputHalfContainer: {
+    width: '80%',
+    backgroundColor: '#ffffff22',
+    height: '35rem',
+    //paddingHorizontal: 16,
+    //paddingBottom: '40rem',
+    borderRadius: '4rem',
   },
 });
 

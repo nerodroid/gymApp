@@ -9,6 +9,7 @@ import ImageButton from '@gym-app/shared/imageButton/imageButton';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import {ParamListBase, RouteProp} from '@react-navigation/native';
+import {View} from 'react-native';
 
 type HomeStackParamList = {
   HomeScreen: undefined;
@@ -21,31 +22,45 @@ type Props = {
   navigation: NativeStackNavigationProp<HomeStackParamList>;
 };
 
-const HomeScreen = ({navigation, route}: Props) => {
+const HomeScreen = ({navigation}: Props) => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       {<ProfileSection />}
 
       <CarouselComponent />
 
-      <ImageButton
-        onClick={() => console.log()}
-        title={'Start Workout'}
-        backgroundColor="#FAFAFA55"
-      />
-      <ImageButton
-        onClick={() => {
-          console.log();
-          navigation.navigate('ScheduleScreen');
-        }}
-        title={'Schedules'}
-        backgroundColor="#FAFAFA55"
-      />
-      <ImageButton
-        onClick={() => navigation.navigate('ExerciseScreen')}
-        title={'Exercises'}
-        backgroundColor="#FAFAFA55"
-      />
+      <View style={styles.buttonContainer}>
+        <ImageButton
+          onClick={() => console.log()}
+          title={'Start Workout'}
+          subTitle="Start your workout"
+          subTitleBackgroundColor="#FFD54F99"
+          backgroundColor="#FAFAFA55"
+          image="https://cdn.muscleandstrength.com/sites/default/files/3_day_beginner_workout_routine_-_1200x630.jpg"
+        />
+
+        <View style={{height: 10}} />
+        <ImageButton
+          onClick={() => {
+            console.log();
+            navigation.navigate('ScheduleScreen');
+          }}
+          title={'Schedules'}
+          subTitle="View your schedules"
+          subTitleBackgroundColor="#64B5F699"
+          backgroundColor="#FAFAFA55"
+          image="https://prod-ne-cdn-media.puregym.com/media/819394/gym-workout-plan-for-gaining-muscle_header.jpg?quality=80"
+        />
+        <View style={{height: 10}} />
+        <ImageButton
+          onClick={() => navigation.navigate('ExerciseScreen')}
+          title={'Exercises'}
+          subTitle="View all exercises"
+          backgroundColor="#FAFAFA55"
+          subTitleBackgroundColor="#81C78499"
+          image="https://www.zumub.com/blog/wp-content/uploads/2017/11/91_Craig-capurso-advanced-level.jpg"
+        />
+      </View>
     </SafeAreaView>
   );
 };
